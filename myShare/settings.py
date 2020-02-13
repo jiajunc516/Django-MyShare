@@ -21,7 +21,13 @@ LOGOUT_URL = "/account/logout"
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "account.authentication.EmailAuthBackend",
+    "social_core.backends.google.GoogleOAuth2",
 ]
+
+# Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "747397722307-rfr7i4f6jh5dhe1gj0dep9uiq3b17k46.apps.googleusercontent.com"
+# Google Consumer Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "bvOmZcy26a0DPSEuWH1aKsMd"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,7 +42,7 @@ SECRET_KEY = 's99v3-g*g=(9d(r!!u(_1xdpy)b!hvnm%#op4o-b4kgv7mz3@g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["myshare.com"]
 
 
 # Application definition
@@ -48,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account.apps.AccountConfig'
+    'account.apps.AccountConfig',
+    'social_django'
 ]
 
 MIDDLEWARE = [

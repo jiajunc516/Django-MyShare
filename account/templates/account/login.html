@@ -13,4 +13,7 @@
     {% csrf_token %}
     <p><input type="submit" value="Log in"></p>
 </form>
+<li class="google">
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+</li>
 {% endblock %}
