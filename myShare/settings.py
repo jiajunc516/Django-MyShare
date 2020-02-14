@@ -22,12 +22,16 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "account.authentication.EmailAuthBackend",
     "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.github.GithubOAuth2",
 ]
 
 # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "747397722307-rfr7i4f6jh5dhe1gj0dep9uiq3b17k46.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "252306274331-3o4iv3s4bth4ksfd6gpdbs6mi815v1fq.apps.googleusercontent.com"
 # Google Consumer Secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "bvOmZcy26a0DPSEuWH1aKsMd"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "_TMBzhgReSdVBWpMkQjv-qdM"
+# Github Key & Secret
+SOCIAL_AUTH_GITHUB_KEY = "53259b2c419f92d33b3b"
+SOCIAL_AUTH_GITHUB_SECRET = "982945bf041c0520d15deabe344ddc3755503003"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
