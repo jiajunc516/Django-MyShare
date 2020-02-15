@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.urls import reverse
 
 class Image(models.Model):
 
@@ -23,3 +24,7 @@ class Image(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Image, self).save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+    # "key: app_name in urls.py, value: url name in urls.py"
+        return reverse("image_app:image_detail", args={self.id, self.slug})

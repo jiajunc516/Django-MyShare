@@ -6,7 +6,15 @@
 <h1>Images</h1>
 
 <p>If you want to upload new images, please click 
-    <a href="{% url 'image_upload' %}">here</a>
+    <a href="{% url 'image_app:image_upload' %}">here</a>
 </p>
+
+{% for image in images %}
+    <div class="image">
+        <a href="{{ image.get_absolute_url }}">
+            <img src="{{ image.image.url }}" height="200" width="300">
+        </a>
+    </div>
+{% endfor %}
 
 {% endblock %}
