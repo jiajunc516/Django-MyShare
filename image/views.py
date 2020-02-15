@@ -19,3 +19,10 @@ def image_upload(request):
         "image/image_upload.html",
         {"form": form}
     )
+
+@login_required
+def image_list(request):
+    return render(
+        request,
+        "image/image_list.html"
+    )
