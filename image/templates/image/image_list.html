@@ -31,4 +31,20 @@
     {% endfor %}
 </div>
 
+<div>
+    <ul>
+        {% if images.has_previous %}
+        <li>
+            <a href="?page={{ images.previous_page_number }}"> &larr; Previous</a>
+        </li>
+        {% endif %}
+
+        {% if images.has_next %}
+        <li>
+            <a href="?page={{ images.next_page_number }}">Next &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
 {% endblock %}

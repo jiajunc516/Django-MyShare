@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ImageForm
 from .models import Image
@@ -24,6 +25,16 @@ def image_upload(request):
 @login_required
 def image_list(request):
     image_list = Image.objects.all()
+    paginator = Paginator(image_list, 12)
+    page = request.GET.get("page")
+    try:
+        image_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver the first page
+        image_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page of results
+        image_list = paginator.page(paginator.num_pages)
     return render(
         request,
         "image/image_list.html",
