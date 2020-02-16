@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import ImageForm
@@ -23,7 +23,7 @@ def image_upload(request):
 
 @login_required
 def image_list(request):
-    image_list = Image.objects.filter(user=request.user)
+    image_list = Image.objects.all()
     return render(
         request,
         "image/image_list.html",
@@ -38,3 +38,15 @@ def image_detail(request, id, slug):
         "image/image_detail.html",
         {"image": image}
     )
+
+@login_required
+def image_like(request, id):
+    image = Image.objects.get(id=id)
+    image.user_like.add(request.user)
+    return redirect("image_app:image_detail", id=id, slug=image.slug)
+
+@login_required
+def image_unlike(request, id):
+    image = Image.objects.get(id=id)
+    image.user_like.remove(request.user)
+    return redirect("image_app:image_detail", id=id, slug=image.slug)
