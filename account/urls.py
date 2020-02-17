@@ -38,4 +38,14 @@ urlpatterns = [
         views.user_list,
         name="user_list"
     ),
+    path(
+        "follow/<str:username>",
+        views.follow,
+        name="follow"
+    ),
+    path(
+        "unfollow/<str:username>",
+        views.unfollow,
+        name="unfollow"
+    )
 ]
