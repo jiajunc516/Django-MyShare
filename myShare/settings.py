@@ -46,7 +46,7 @@ SECRET_KEY = 's99v3-g*g=(9d(r!!u(_1xdpy)b!hvnm%#op4o-b4kgv7mz3@g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["myshare.com"]
+ALLOWED_HOSTS = ["myshare.com", "127.0.0.1"]
 
 
 # Application definition

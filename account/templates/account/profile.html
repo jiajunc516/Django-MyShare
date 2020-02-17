@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<h1>{{ user.username }}</h1>
+<div class="images">
+    <img src="{{ user.gravatar }}" class="item-img">
+</div>
+<p>First Name: {{ user.firstname }}</p>
+<p>Last Name: {{ user.lastname }}</p>
+<p>Following: {{ user.following.count }}</p>
+<p>Followers: {{ user.followers.count }}</p>
+
+{% endblock %}
