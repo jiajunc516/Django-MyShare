@@ -32,5 +32,10 @@ urlpatterns = [
         "<str:username>",
         views.profile,
         name="profile"
-    )
+    ),
+    path(
+        "user_list/",
+        views.user_list,
+        name="user_list"
+    ),
 ]
