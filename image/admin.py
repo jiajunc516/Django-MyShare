@@ -7,4 +7,4 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "user", "created")
     list_filter = ("user", "created")
     search_fields = ("title", "description")
-    
+    ordering = ("user", "created")
