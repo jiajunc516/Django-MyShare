@@ -283,3 +283,44 @@ img.user-detail {
     font-style:italic;
     color:#ccc;
 }
+.comment {
+    padding: 4px 4px 8px 4px;
+    margin-top: 200px;
+    border-top: 1px solid #ddd;
+    font-size: 80%;
+}
+.comment pre {
+    font-size: 90%;
+    font-family: verdana, sans-serif;
+}
+.commentform {
+    font-size: 120%;
+    line-height: 1.3em;
+}
+.comment ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.comment ul li:nth-child(odd) {
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+}
+.comment ul li {
+    padding: 8px;
+}
+.comment ul li div.comment-thumbnail {
+    width: 60px;
+    position: absolute;
+}
+.comment ul li div.comment-body {
+    margin-left: 100px;
+    overflow: auto;
+}
+
+.label-time {
+    color: rgb(109, 105, 105);
+}
+textarea#comment {
+    height: 150px;
+}

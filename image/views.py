@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .forms import ImageForm
-from .models import Image
+from .forms import ImageForm, CommentForm
+from .models import Image, Comment
 
 @login_required
 def image_upload(request):
@@ -44,10 +44,30 @@ def image_list(request):
 @login_required
 def image_detail(request, id, slug):
     image = Image.objects.filter(id=id, slug=slug).first()
+
+    # List of active comments
+    comments = image.comment.filter(active=True)
+    new_comment = None
+    if request.method == "POST":
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.image = image
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
     return render(
         request,
         "image/image_detail.html",
-        {"image": image}
+        {
+            "image": image,
+            "comments": comments,
+            "new_comment": new_comment,
+            "comment_form": comment_form
+        }
     )
 
 @login_required

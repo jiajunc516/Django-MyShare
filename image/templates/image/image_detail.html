@@ -5,6 +5,7 @@
 {% block content %}
 
 <h1>{{ image.title }}</h1>
+
 <img src="{{ image.image.url }}" class="image-detail">
 
 {% with total_likes=image.user_like.count users_like=image.user_like.all %}
@@ -28,9 +29,41 @@
         </a>
         {% endif %}
     </div>
-    {{ image.description|linebreaks }}
+    <p>
+    {{ image.description|linebreaks }}</p>
 </div>
-
 {% endwith %}
+
+
+<div class="comment">
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <div class="comment-thumbnail">
+                <a href="{% url 'profile' comment.user.username %}">
+                    <img src="{{ comment.user.gravatar }}">
+                </a>
+            </div>
+            <div class="comment-body">
+                <p>
+                    <span>{{ comment.user.username }}</span> 
+                    <span class="label-time">@{{ comment.created }}</span>
+                </p>
+                <div style="overflow: auto;">
+                    <p style="white-space: pre-wrap;">{{ comment.comment }}</p>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form action="." method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <p>
+            <input type="submit" value="Reply">
+        </p>
+    </form>
+</div>
 
 {% endblock %}
