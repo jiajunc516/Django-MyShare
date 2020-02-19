@@ -9,25 +9,13 @@
     <img src="{{ user.gravatar }}" class="item-img">
 </div>
 
-<div class="image-info">
-    {% if request.user.username != user.username %}
-    <div>
-        {% if request.user in user.followers.all %}
-            <a class="count-like" href="{% url 'unfollow' user.username %}">
-                following
-            </a>
-        {% else %}
-            <a class = "count" href="{% url 'follow' user.username %}">
-                follow
-            </a>
-        {% endif %}
-    </div>
-    {% endif %}
-</div>
-
 <p>First Name: {{ user.first_name }}</p>
 <p>Last Name: {{ user.last_name }}</p>
 <p>Following: {{ user.following.count }}</p>
 <p>Followers: {{ user.followers.count }}</p>
+
+<li>
+    <a href="{% url 'password_change' %}"><u>Change Password</u></a>
+</li>
 
 {% endblock %}

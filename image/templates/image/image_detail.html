@@ -40,7 +40,7 @@
         {% for comment in comments %}
         <li>
             <div class="comment-thumbnail">
-                <a href="{% url 'profile' comment.user.username %}">
+                <a href="{% url 'user_page' comment.user.id %}">
                     <img src="{{ comment.user.gravatar }}">
                 </a>
             </div>

@@ -27,11 +27,11 @@
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello 
-                <a href="{% url 'profile' request.user.username %}">
+                <a href="{% url 'user_page' request.user.id %}">
                     <u>{{ request.user.first_name }}</u>,
                 </a>
                 <a href="{% url 'logout' %}"><u>Logout</u></a>
-                /<a href="{% url 'password_change' %}"><u>Change Password</u></a>
+                /<a href="{% url 'profile' request.user.username %}"><u>Profile</u></a>
             {% else %}
                 <a href="{% url 'login' %}"><u>Log-in</u></a>
             {% endif %}

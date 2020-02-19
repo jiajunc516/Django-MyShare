@@ -8,7 +8,7 @@
 
 <div id="image">
     {% for user in user_list %}
-    <a href="{% url 'profile' user.username %}">
+    <a href="{% url 'user_page' user.id %}">
         <img src="{{ user.gravatar }}" class="item-img">
     </a>
     {% endfor %}

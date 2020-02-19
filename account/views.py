@@ -103,3 +103,12 @@ def unfollow(request, username):
     if con:
         con.delete()
     return redirect("profile", username=username)
+
+@login_required
+def user_page(request, id):
+    user = User.objects.filter(id=id).first()
+    return render(
+        request,
+        "account/user_page.html",
+        {"user": user}
+    )
