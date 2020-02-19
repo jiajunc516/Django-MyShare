@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import MyUserCreationForm
 from .models import Contact
+from image.models import Image
 
 '''
 from django.http import HttpResponse
@@ -93,7 +95,7 @@ def follow(request, username):
         user_to = user_to
     )
     con.save()
-    return redirect("profile", username=username)
+    return redirect("user_page", id=user_to.id)
 
 @login_required
 def unfollow(request, username):
@@ -102,13 +104,28 @@ def unfollow(request, username):
     con = Contact.objects.filter(user_from = user_from, user_to = user_to).first()
     if con:
         con.delete()
-    return redirect("profile", username=username)
+    return redirect("user_page", id=user_to.id)
 
 @login_required
 def user_page(request, id):
     user = User.objects.filter(id=id).first()
+    image_list = Image.objects.filter(user=user)
+    paginator = Paginator(image_list, 12)
+    page = request.GET.get("page")
+    try:
+        image_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver the first page
+        image_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page of results
+        image_list = paginator.page(paginator.num_pages)
+
     return render(
         request,
         "account/user_page.html",
-        {"user": user}
+        {
+            "user": user,
+            "images": image_list
+        }
     )

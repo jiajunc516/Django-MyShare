@@ -227,7 +227,7 @@ a.like, a.follow { float:right; margin-top:-8px; }
     width:220px;
     height:300px;
     margin:0 10px 10px 10px;
-    border-top:8px solid #2ea7c5;
+    border-top:1px solid #8a8e8f;
     background:#eee;
 }
 #image-list img { width:220px; height:220px; }
@@ -323,4 +323,13 @@ img.user-detail {
 }
 textarea#comment {
     height: 150px;
+}
+
+.upload-button {
+    float: right;
+    color: #10b7bd;
+}
+.upload-divider {
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
