@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<h1>Home</h1>
+<p class="home-display">
+    <a href="{% url 'user_page' request.user.id %}" class="home-upload">Manage My Uploads</a>
+</p>
+
+{% for image in images %}
+
+<div class="home-image">
+    <div class="home-info">
+        <a href="{% url 'user_page' image.user.id %}">
+            <img src="{{ image.user.gravatar }}" class="home-user">
+        </a>
+        <p class="home-label">
+            <span>
+                <a style="color: #10b7bd" href="{% url 'user_page' image.user.id %}">{{ image.user.username }}</a>
+            </span> 
+            <span>uploaded</span>
+            <span class="label-time"> @{{ image.created }}</span>
+        </p>
+    </div>
+
+    <a href="{{ image.get_absolute_url }}">
+        {% thumbnail image.image "300x300" crop="center" as im %}
+            <a href="{{ image.get_absolute_url }}">
+                <img class="home-img" src="{{ im.url }}">
+            </a>
+        {% endthumbnail %}
+    </a>
+</div>
+{% endfor %}
+
+
+
+<div id="home-page">
+    <ul>
+        {% if images.has_previous %}
+        <li>
+            <a href="?page={{ images.previous_page_number }}"> &larr; Previous</a>
+        </li>
+        {% endif %}
+
+        {% if images.has_next %}
+        <li>
+            <a href="?page={{ images.next_page_number }}">Next &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+{% endblock %}

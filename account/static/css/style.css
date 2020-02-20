@@ -333,3 +333,34 @@ textarea#comment {
     margin-top: 50px;
     margin-bottom: 40px;
 }
+
+.home-display {
+    margin-bottom: 60px;
+}
+.home-upload {
+    float: right;
+    color: #00cffa;
+}
+
+.home-image {
+    margin-bottom: 50px;
+}
+.home-img { 
+    width:220px; 
+    height:220px; 
+}
+.home-info { 
+    margin-right: 30%;
+    padding: 10px;
+    background-color: #eee;
+}
+.home-info a { color:#333; }
+.home-user {
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+#home-page a {
+    color: #00cffa;
+}

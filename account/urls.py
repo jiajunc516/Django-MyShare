@@ -16,7 +16,7 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="account/logout.html"),
         name="logout"
     ),
-    path("", views.dashboard, name="dashboard"),
+    path("", views.home, name="home"),
     path("register/", views.register, name="register"),
     path(
         "password-change/",
@@ -52,5 +52,15 @@ urlpatterns = [
         "user/<int:id>",
         views.user_page,
         name="user_page"
+    ),
+    path(
+        "following/<int:id>",
+        views.following_users,
+        name="following_users"
+    ),
+    path(
+        "followers/<int:id>",
+        views.follower_users,
+        name="followers"
     )
 ]

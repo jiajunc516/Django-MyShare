@@ -40,10 +40,29 @@ def user_login(request):
         )
 '''
 @login_required
-def dashboard(request):
+def home(request):
+    image_list = []
+    
+    for user in request.user.following.all():
+        for image in Image.objects.filter(user=user):
+            image_list.append(image)
+    image_list.sort(key=lambda x: x.created, reverse=True)
+
+    paginator = Paginator(image_list, 3)
+    page = request.GET.get("page")
+    try:
+        image_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver the first page
+        image_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page of results
+        image_list = paginator.page(paginator.num_pages)
+
     return render(
         request,
-        "account/dashboard.html",
+        "account/home.html",
+        {"images": image_list}
     )
 
 def register(request):
@@ -128,4 +147,24 @@ def user_page(request, id):
             "user": user,
             "images": image_list
         }
+    )
+
+@login_required
+def following_users(request, id):
+    user = User.objects.filter(id=id).first()
+    following_users = user.following.all()
+    return render(
+        request,
+        "account/following_users.html",
+        {"following_users": following_users}
+    )
+
+@login_required
+def follower_users(request, id):
+    user = User.objects.filter(id=id).first()
+    followers = user.followers.all()
+    return render(
+        request,
+        "account/follower_users.html",
+        {"followers": followers}
     )

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Followers{% endblock %}
+
+{% block content %}
+
+<h1>Followers</h1>
+
+{% if followers %}
+    <div class="image">
+        {% for user in followers %}
+        <a href="{% url 'user_page' user.id %}">
+            <img src="{{ user.gravatar }}" class="item-img">
+        </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No one has followed this user yet.</p>
+{% endif %}
+
+{% endblock %}

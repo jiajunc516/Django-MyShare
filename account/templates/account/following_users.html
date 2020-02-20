@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Following{% endblock %}
+
+{% block content %}
+
+<h1>Following Users</h1>
+
+{% if following_users %}
+    <div class="image">
+        {% for user in following_users %}
+        <a href="{% url 'user_page' user.id %}">
+            <img src="{{ user.gravatar }}" class="item-img">
+        </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>This user hasn't followed anyone yet.</p>
+{% endif %}
+
+{% endblock %}

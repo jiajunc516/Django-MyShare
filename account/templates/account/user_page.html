@@ -27,7 +27,14 @@
     {% endif %}
 </div>
 
-<p>Followers: {{ user.followers.count }}</p>
+<p>
+    <a style="color:#33bfe2" href="{% url 'following_users' user.id %}">Following</a>
+    : {{ user.following.count }}
+</p>
+<p>
+    <a style="color:#33bfe2" href="{% url 'followers' user.id %}">Followers</a>
+    : {{ user.followers.count }}
+</p>
 
 
 <h2>Uploads</h2>
