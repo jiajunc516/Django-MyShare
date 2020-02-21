@@ -6,6 +6,38 @@
 
 <h1>{{ image.title }}</h1>
 
+<div class="detail-info">
+    <a href="{% url 'user_page' image.user.id %}">
+        <img src="{{ image.user.gravatar }}" class="item-img">
+    </a>
+    
+    <div class="image-info">
+        {% if request.user.username != image.user.username %}
+        <div>
+            {% if request.user in image.user.followers.all %}
+                <a class="count-like" href="{% url 'image_app:image_unfollow' image.id %}">
+                    following
+                </a>
+            {% else %}
+                <a class = "count" href="{% url 'image_app:image_follow' image.id %}">
+                    follow
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <p>{{ image.user.username }}</p>
+    <p>
+        <a style="color:#33bfe2" href="{% url 'following_users' image.user.id %}">Following</a>
+        : {{ image.user.following.count }}
+    </p>
+    <p>
+        <a style="color:#33bfe2" href="{% url 'followers' image.user.id %}">Followers</a>
+        : {{ image.user.followers.count }}
+    </p>
+</div>
+
 <img src="{{ image.image.url }}" class="image-detail">
 
 {% with total_likes=image.user_like.count users_like=image.user_like.all %}

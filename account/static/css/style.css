@@ -378,3 +378,8 @@ textarea#comment {
     float: left;
     color: #e27298;
 }
+
+.detail-info {
+    float: right;
+    background-color: #eee;
+}

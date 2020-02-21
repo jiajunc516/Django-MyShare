@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
+from django.contrib.auth.models import User
 
 from .forms import ImageForm, CommentForm, TagForm
 from .models import Image, Comment
@@ -106,3 +107,25 @@ def add_tag(request, id):
         "image/add_tag.html",
         {"tag_form": form}
     )
+
+@login_required
+def image_follow(request, id):
+    image = Image.objects.get(id=id)
+    user_to = User.objects.filter(username=image.user.username).first()
+    user_from = request.user
+    con = Contact(
+        user_from = user_from,
+        user_to = user_to
+    )
+    con.save()
+    return redirect("image_app:image_detail", id=id, slug=image.slug)
+
+@login_required
+def image_unfollow(request, id):
+    image = Image.objects.get(id=id)
+    user_to = User.objects.filter(username=image.user.username).first()
+    user_from = request.user
+    con = Contact.objects.filter(user_from = user_from, user_to = user_to).first()
+    if con:
+        con.delete()
+    return redirect("image_app:image_detail", id=id, slug=image.slug)

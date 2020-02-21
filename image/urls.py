@@ -39,5 +39,15 @@ urlpatterns = [
         "add-tag/<int:id>/",
         views.add_tag,
         name="add_tag"
-    )
+    ),
+    path(
+        "follow/<int:id>",
+        views.image_follow,
+        name="image_follow"
+    ),
+    path(
+        "unfollow/<int:id>",
+        views.image_unfollow,
+        name="image_unfollow"
+    ),
 ]
