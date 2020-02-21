@@ -368,6 +368,13 @@ textarea#comment {
 .tag {
     margin-top: 100px;
 }
-.tag-tag {
+.tag a:hover{
     color: #00cffa;
+}
+.tag-tag {
+    color: #e27298;
+}
+.tag-add {
+    float: left;
+    color: #e27298;
 }

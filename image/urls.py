@@ -34,5 +34,10 @@ urlpatterns = [
         "tag/<str:tag_slug>/",
         views.image_list,
         name="image_list_by_tag"
+    ),
+    path(
+        "add-tag/<int:id>/",
+        views.add_tag,
+        name="add_tag"
     )
 ]

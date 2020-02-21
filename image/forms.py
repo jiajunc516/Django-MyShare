@@ -12,3 +12,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ("comment", )
+
+class TagForm(forms.Form):
+    tags = forms.CharField()

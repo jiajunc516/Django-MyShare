@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Please enter a comma-separated list of tags. Do not include any other symbol unless it's necessary.</p>
+<form method="post">
+    {% csrf_token %}
+    {{ tag_form.as_p }}
+    <button type="submit">Add</button>
+</form>
+
+{% endblock %}

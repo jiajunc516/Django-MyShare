@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
 
-from .forms import ImageForm, CommentForm
+from .forms import ImageForm, CommentForm, TagForm
 from .models import Image, Comment
 
 @login_required
@@ -87,3 +87,22 @@ def image_unlike(request, id):
     image = Image.objects.get(id=id)
     image.user_like.remove(request.user)
     return redirect("image_app:image_detail", id=id, slug=image.slug)
+
+@login_required
+def add_tag(request, id):
+    image = Image.objects.get(id=id)
+
+    if request.method == "POST":
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tags = form.cleaned_data['tags']
+            for tag in tags.split(','):
+                image.tags.add(tag)
+            return redirect("image_app:image_detail", id=id, slug=image.slug)
+    else:
+        form = TagForm()
+    return render(
+        request,
+        "image/add_tag.html",
+        {"tag_form": form}
+    )
