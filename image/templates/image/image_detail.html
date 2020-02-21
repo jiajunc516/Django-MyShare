@@ -34,6 +34,15 @@
 </div>
 {% endwith %}
 
+<div class="tag">
+    <p>
+        Tags: 
+        {% for tag in image.tags.all %}
+        <a class="tag-tag" href="{% url 'image_app:image_list_by_tag' tag.slug %}">#{{ tag.name }}</a>
+        {% if not forloop.last %} {% endif %}
+        {% endfor %}
+    </p>
+</div>
 
 <div class="comment">
     <ul>

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 class Image(models.Model):
 
@@ -12,7 +13,7 @@ class Image(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
-    url = models.URLField()
+    url = models.URLField(null=True, blank=True)
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
     image = models.ImageField(upload_to="images/%Y/%m/%d/")
@@ -22,6 +23,7 @@ class Image(models.Model):
         related_name="images_liked",
         blank=True
     )
+    tags = TaggableManager()
 
     class Meta:
         ordering = ("-created", )

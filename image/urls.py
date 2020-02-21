@@ -29,5 +29,10 @@ urlpatterns = [
         "unlike/<int:id>/",
         views.image_unlike,
         name="image_unlike"
+    ),
+    path(
+        "tag/<str:tag_slug>/",
+        views.image_list,
+        name="image_list_by_tag"
     )
 ]

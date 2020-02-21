@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from taggit.models import Tag
 
 from .forms import ImageForm, CommentForm
 from .models import Image, Comment
@@ -23,8 +24,13 @@ def image_upload(request):
     )
 
 @login_required
-def image_list(request):
-    image_list = Image.objects.all()
+def image_list(request, tag_slug=None):
+    if tag_slug:
+        tag = Tag.objects.filter(slug=tag_slug).first()
+        image_list = Image.objects.filter(tags__in=[tag])
+    else:
+        image_list = Image.objects.all()
+    
     paginator = Paginator(image_list, 12)
     page = request.GET.get("page")
     try:

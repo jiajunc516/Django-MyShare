@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'social_django',
     'image.apps.ImageConfig',
     'sorl.thumbnail',
+    'taggit'
 ]
 
 MIDDLEWARE = [
