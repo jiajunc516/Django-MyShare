@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from .forms import ImageForm, CommentForm, TagForm
 from .models import Image, Comment
+from account.models import Contact
 
 @login_required
 def image_upload(request):
